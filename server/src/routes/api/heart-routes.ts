@@ -1,23 +1,20 @@
 import express from "express";
 import { authenticateToken } from "../../middleware/auth.js";
 import {
-  getUserHearts,
-  getUserHeartById,
-  createUserHeart,
-  updateUserHeart,
+  getUserHeartData,
+  createUserHeartData,
+  updateUserHeartData,
   deleteUserHeart,
 } from "../../controllers/usersHeartController.js";
 
 const router = express.Router();
 
-router.get('/', authenticateToken, getUserHearts);
+router.get('/', authenticateToken, getUserHeartData);
 
-router.get('/:id', getUserHeartById);
+router.post('/', createUserHeartData);
 
-router.post('/', createUserHeart);
-
-router.put('/:id', updateUserHeart);
+router.put('/:id', updateUserHeartData);
 
 router.delete('/:id', deleteUserHeart);
 
-export { router as userHeartRouter };
+export { router as userHeart };

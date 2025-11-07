@@ -1,6 +1,6 @@
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import './Landing.css';
+import '../CSS/Landing.css';
 
 const Landing = () => {
   const { isLoggedIn } = useAuth();
@@ -9,9 +9,9 @@ const Landing = () => {
     <div className="landing">
       {!isLoggedIn ? (
       <div className="container">
-        <h1>Welcome to Car-Pal!</h1>
-        <h1>A place to remind you that your car needs you.</h1>
-        <h3>Just add simple data and the app will do the rest. Maintenance reminders, Miles Per Gallon, Cost of Ownership, and More.</h3>
+        <h1>Heart-Tracker</h1>
+        <h1>The place for tracking data of Congestive Heart Failure Patients</h1>
+        <h2>No more entering data for vitals in multiple places. One place, all the data. Cardiologists will be efficently able to help you with thid data conviently available to see!</h2>
         <h3>To get started, please login or create an account</h3>
           <>
             <button className="landbtn" type="button">
@@ -25,11 +25,11 @@ const Landing = () => {
         ) : (
           <>
             <div className="welcome">
-              <h1>Welcome to Car-Pal!</h1>
+              <h1>Welcome to your Heart-Tracker</h1>
             </div>
             <div className="links">
-              <h3><Link to="/DisplayVehicles">Your Vehicles</Link></h3>
-              <h3><Link to="/NewVehicles">Enter a New Vehicle</Link></h3>
+              <h3><Link to="/DisplayHeartData">See your Data</Link></h3>
+              <h3><Link to="/NewHeartData">Enter a New Data</Link></h3>
             </div>
           </>
         )}

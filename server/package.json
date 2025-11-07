@@ -2,11 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.cjs",
   "type": "module",
   "scripts": {
     "build": "npx tsc",
-    "start": "npm run build && node dist/server.js --ignore client",
+    "start": "npm run build && node dist/server.cjs --ignore client",
     "dev": "npx nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node dist/seeds/index.js"
@@ -15,8 +15,8 @@
     "watch": [
       "src"
     ],
-    "ext": "ts,json,js",
-    "exec": "npx tsc && node dist/server.js"
+    "ext": "ts,json,js,cjs",
+    "exec": "npx tsc && node dist/server.cjs"
   },
   "keywords": [],
   "author": "",

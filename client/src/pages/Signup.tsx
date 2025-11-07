@@ -9,6 +9,9 @@ const SignUp = () => {
   const [userData, setUserData] = useState<UserLogin>({
     username: "",
     email: "",
+    first_name: "",
+    last_name: "",
+    age: 0,
     password: "",
   });
   const handleChange = (
@@ -64,6 +67,33 @@ const SignUp = () => {
             className="form-input"
             type="email"
             name="email"
+            onChange={handleChange}
+            />
+        </div>
+        <div className="form-group">
+          <label>First Name</label>
+          <input
+            className="form-input"
+            type="first_name"
+            name="first_name"
+            onChange={handleChange}
+            />
+        </div>
+        <div className="form-group">
+          <label>Last Name</label>
+          <input
+            className="form-input"
+            type="last_name"
+            name="last_name"
+            onChange={handleChange}
+            />
+        </div>
+        <div className="form-group">
+          <label>Age</label>
+          <input
+            className="form-input"
+            type="age"
+            name="age"
             onChange={handleChange}
             />
         </div>

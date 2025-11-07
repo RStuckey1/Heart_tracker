@@ -25,7 +25,7 @@ export class Heart extends Model<IHeart, HeartCreationAttributes> implements IHe
 
 
 
-export function VehicleFactory(sequelize: Sequelize): typeof Heart {
+export function HeartFactory(sequelize: Sequelize): typeof Heart {
   Heart.init(
     {
       id: {

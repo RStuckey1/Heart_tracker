@@ -4,7 +4,9 @@ function Footer() {
   return (
     <footer>
       <p>
-      Car-Pal  &copy; {new Date().getFullYear()} Created by Richard Stuckey
+      CHF Tracker  &copy; {new Date().getFullYear()} Created by Richard Stuckey
+      </p>
+      <p> Live Longer. You're Worth It!
       </p>
     </footer>
   );

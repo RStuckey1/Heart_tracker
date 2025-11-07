@@ -1,6 +1,41 @@
 {
+  "name": "main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run client:build && npm run server",
+    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
+    "server": "cd server && npm start",
+    "server:dev": "cd server && npm run dev",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "client:build": "cd client && npm run build",
+    "client:dev": "cd client && npm run dev",
+    "build": "cd server && npm run build && cd ../client && npm run build",
+    "render-build": "npm install && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jwt-decode": "^3.1.0",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.10",
+    "react-router-dom": "^6.26.2",
+    "wait-on": "^7.2.0"
+  },
   "dependencies": {
-    "-": "^0.0.1",
-    "vite": "^7.1.11"
-  }
+    "express": "^4.21.1",
+    "jwt-decode": "^4.0.0",
+    "pg": "^8.13.0",
+    "pg-hstore": "^2.3.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sequelize": "^6.37.7",
+    "typescript": "^5.6.3"
+  },
+  "type": "module"
 }
