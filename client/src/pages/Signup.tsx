@@ -22,12 +22,13 @@ const SignUp = () => {
     const { name, value } = e.target;
     setUserData({
       ...userData,
-      [name]: value,
+      [name]: name === "age" ? Number(value) : value,
     });
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    console.log("Submitting user data:", userData);
     try {
       const data = await signUp(userData);
       Auth.login(data.token);
@@ -52,20 +53,11 @@ const SignUp = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            className="form-input"
-            type="password"
-            name="password"
-            onChange={handleChange}
-            />
-         </div>
            <div className="form-group">
           <label>Email</label>
           <input
             className="form-input"
-            type="email"
+            type="text"
             name="email"
             onChange={handleChange}
             />
@@ -74,7 +66,7 @@ const SignUp = () => {
           <label>First Name</label>
           <input
             className="form-input"
-            type="first_name"
+            type="text"
             name="first_name"
             onChange={handleChange}
             />
@@ -83,7 +75,7 @@ const SignUp = () => {
           <label>Last Name</label>
           <input
             className="form-input"
-            type="last_name"
+            type="text"
             name="last_name"
             onChange={handleChange}
             />
@@ -92,8 +84,17 @@ const SignUp = () => {
           <label>Age</label>
           <input
             className="form-input"
-            type="age"
+            type="number"
             name="age"
+            onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+          <label>Password</label>
+          <input
+            className="form-input"
+            type="password"
+            name="password"
             onChange={handleChange}
             />
         </div>

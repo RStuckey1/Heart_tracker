@@ -1,5 +1,6 @@
 import React from 'react';
 import { deleteHeart } from '../api/HeartAPI';
+import Auth from '../utils/auth';
 import '../CSS/DisplayRecords.css';
 
 type HeartData = {
@@ -20,8 +21,15 @@ const DisplayRecords: React.FC = () => {
   React.useEffect(() => {
   const fetchHeartData = async () => {
     try {
-    // You'll need to implement getUserHeartData in your api service
-    const response = await fetch('/api/heart-data'); // Adjust endpoint as needed
+    const response = await fetch('/api/heart/', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
     setHeartDataList(data);
     } catch (error) {

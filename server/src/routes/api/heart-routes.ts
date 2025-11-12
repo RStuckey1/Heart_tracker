@@ -11,10 +11,10 @@ const router = express.Router();
 
 router.get('/', authenticateToken, getUserHeartData);
 
-router.post('/', createUserHeartData);
+router.post('/', authenticateToken, createUserHeartData);
 
-router.put('/:id', updateUserHeartData);
+router.put('/:id', authenticateToken, updateUserHeartData);
 
-router.delete('/:id', deleteUserHeart);
+router.delete('/:id', authenticateToken, deleteUserHeart);
 
 export { router as userHeart };

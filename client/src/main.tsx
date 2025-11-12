@@ -1,4 +1,3 @@
-
 import React from "react";
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -25,27 +24,27 @@ const router = createBrowserRouter([
         element: <Landing />
       },
       {
-        path: '/landing',
+        path: 'landing',
         element: <Landing />
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login />
       },
       {
-        path: '/NewHeartData',
+        path: 'NewHeartData',
         element: <NewHeartData />
       },
       {
-        path: '/signup',
+        path: 'signup',
         element: <Signup />
       },
       {
-        path: '/DisplayRecords/',
+        path: 'DisplayRecords',
         element: <DisplayRecords />
       },
       {
-        path: '/ErrorPage',
+        path: 'ErrorPage',
         element: <ErrorPage />
       }
     ]

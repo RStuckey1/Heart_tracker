@@ -22,7 +22,7 @@
 
   },
 
-  "include": ["src/**/*"],
+  "include": ["HeartTracker/**/*"],
 
   "exclude": ["node_modules"]
 

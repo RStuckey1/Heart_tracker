@@ -3,6 +3,8 @@ import { User} from "./user.js";
 
 interface IHeart {
   id: number;
+  date: Date;
+  time: Date;
   systolic: number;
   diastolic: number;
   pulse: number;
@@ -15,6 +17,8 @@ interface HeartCreationAttributes extends Optional<IHeart, "id"> { }
 export class Heart extends Model<IHeart, HeartCreationAttributes> implements IHeart {
 
     public id!: number;
+    public date!: Date;
+    public time!: Date;
     public systolic!: number;
     public diastolic!: number;
     public pulse!: number;
@@ -32,6 +36,14 @@ export function HeartFactory(sequelize: Sequelize): typeof Heart {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+      },
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      time: {
+        type: DataTypes.DATE,
+        allowNull: false,
       },
       systolic: {
         type: DataTypes.INTEGER,

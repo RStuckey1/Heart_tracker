@@ -36,13 +36,15 @@ const signUp = async (newUser: UserLogin) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error('Could not create user, check network tab!');
+      console.error('Signup error response:', data);
+      throw new Error(data.message || 'Could not create user, check network tab!');
     }
 
     return data;
   } catch (err) {
     console.log('Error from sign up: ', err);
+    return Promise.reject('Could not create user');
   }
-}
+};
 
 export { loginauth, signUp };

@@ -5,7 +5,7 @@ import { Router } from "express";
 const router = Router();
 
 router.use("/user", userRouter);
-router.use("/userHeart", userHeartRouter);
+router.use("/heart", userHeartRouter);
 
 
 export default router;

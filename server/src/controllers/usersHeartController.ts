@@ -38,6 +38,7 @@ export const getUserHeartData = async (_req: Request, res: Response) => {
 export const createUserHeartData = async (req: Request, res: Response) => {
   const { date, time, systolic, diastolic, pulse, weight, UserId } = req.body;
   try {
+    console.log('Received heart data:', req.body);
     const newHeartData = await Heart.create({
       date,
       time,
@@ -49,6 +50,7 @@ export const createUserHeartData = async (req: Request, res: Response) => {
     } as any);
     res.status(201).json(newHeartData);
   } catch (error: any) {
+    console.error('Error creating heart data:', error);
     res.status(400).json({ message: error.message });
   }
 };

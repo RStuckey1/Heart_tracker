@@ -40,8 +40,8 @@ const CustomNavbar = () => {
               <a href="javascript:void(0)" className="dropbtn">Menu</a>
               <div className="dropdown-content">
               <a href="#"><Link to="/Landing">Home</Link></a>
-              <a href="#"><Link to="/DisplayVehicles">Your Data</Link></a>
-              <a href="#"><Link to="/NewVehicles">New Entry</Link></a>
+              <a href="#"><Link to="/DisplayRecords">Your Data</Link></a>
+              <a href="#"><Link to="/NewHeartData">New Entry</Link></a>
               <a href="#"><button onClick={handleLogout}>Logout</button></a>
               </div>
               </li>

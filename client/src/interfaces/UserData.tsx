@@ -4,6 +4,6 @@ export interface UserData {
   email: string | null;
   first_name: string | null;
   last_name: string | null;
-  age: 0;
+  age: number;
   password: string | null;
 }

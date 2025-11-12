@@ -71,7 +71,7 @@ const retrieveHeartById = async (id: number | null): Promise<HeartData> => {
 
 const createHeart = async (body: HeartData) => {
   try {
-    // Removed unused token variable
+    console.log('Sending heart data:', body);
     const response = await fetch(
       '/api/heart/', {
       method: 'POST',
@@ -83,17 +83,19 @@ const createHeart = async (body: HeartData) => {
     }
 
     )
-    const data = response.json();
+    const data = await response.json();
 
     if (!response.ok) {
-      throw new Error('invalid API response, check network tab!');
+      console.error('Heart data creation error - Status:', response.status, 'Data:', data);
+      const errorMessage = data.message || `Server error: ${response.status} ${response.statusText}`;
+      throw new Error(errorMessage);
     }
 
     return data;
 
-  } catch (err) {
-    console.log('Error from heart data Creation: ', err);
-    return Promise.reject('Could not create heart data');
+  } catch (err: any) {
+    console.error('Error from heart data Creation:', err);
+    return Promise.reject(err.message || 'Could not create heart data');
   }
 }
 

@@ -6,49 +6,77 @@ import type { HeartData } from '../interfaces/HeartData.tsx';
 import { useAuth } from '../context/AuthContext.tsx';
 
 const NewHeartData = () => {
-  const { User: loggedInUser, loading } = useAuth(); // Include loading state from AuthContext
+  const { User: loggedInUser, loading } = useAuth();
   const navigate = useNavigate();
 
-  const [newHeartData, setNewHeartData] = useState<HeartData | null>(null); // Initialize as null
+  const [newHeartData, setNewHeartData] = useState<HeartData | null>(null);
 
   // Initialize the newHeartData state once loggedInUser is available
   useEffect(() => {
     if (!loading && loggedInUser) {
+      const now = new Date();
+      const timeString = now.toTimeString().split(' ')[0].substring(0, 5);
       setNewHeartData({
-        id: 2,
         date: new Date(),
-        time: new Date(),
+        time: timeString,
         systolic: 0,
         diastolic: 0,
         pulse: 0,
         weight: 0,
-        UserId: loggedInUser.id, // Assign the logged-in user's ID
+        UserId: loggedInUser.id,
       });
     }
   }, [loggedInUser, loading]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!newHeartData) return;
+    if (!newHeartData) {
+      console.error('No heart data to submit');
+      return;
+    }
+    
+    // Convert time string to Date object
+    const timeString = typeof newHeartData.time === 'string' ? newHeartData.time : newHeartData.time.toTimeString().split(' ')[0].substring(0, 5);
+    const [hours, minutes] = timeString.split(':');
+    const timeDate = new Date();
+    timeDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+    
+    const dataToSubmit = {
+      ...newHeartData,
+      time: timeDate
+    };
+    
+    console.log('Submitting heart data:', JSON.stringify(dataToSubmit, null, 2));
     try {
-      const data = await createHeartAPI(newHeartData);
-      console.log('Heart Data created:', data);
-      navigate('/DisplayRecords', { state: { HeartId: data.id, initialMiles: data.miles } });
+      const data = await createHeartAPI(dataToSubmit);
+      console.log('Heart Data created successfully:', data);
+      console.log('Navigating to /DisplayRecords');
+      navigate('/DisplayRecords');
+      console.log('Navigation called');
     } catch (err) {
       console.error('Failed to create New Data:', err);
+      alert(`Failed to create heart data: ${err}`);
     }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setNewHeartData((prev) => prev && ({
-      ...prev,
-      [name]: name === 'date' ? new Date(value) : name === 'time' ? new Date(`1970-01-01T${value}`) : name === 'systolic' || name === 'diastolic' || name === 'pulse' || name === 'weight' ? Number(value) : value,
-    }));
+    setNewHeartData((prev) => {
+      if (!prev) return prev;
+      
+      if (name === 'date') {
+        return { ...prev, date: new Date(value) };
+      } else if (name === 'time') {
+        return { ...prev, time: value };
+      } else if (name === 'systolic' || name === 'diastolic' || name === 'pulse' || name === 'weight') {
+        return { ...prev, [name]: Number(value) };
+      }
+      
+      return { ...prev, [name]: value };
+    });
   };
 
   if (loading || !newHeartData) {
-    // Show a loading indicator or nothing while loading
     return <p>Loading...</p>;
   }
 
@@ -71,13 +99,13 @@ const NewHeartData = () => {
           type="time"
           id="time"
           name="time"
-          value={newHeartData.time instanceof Date ? newHeartData.time.toTimeString().split(' ')[0].substring(0, 5) : ''}
+          value={typeof newHeartData.time === 'string' ? newHeartData.time : ''}
           onChange={handleChange}
         />
 
         <label htmlFor="systolic">Systolic</label>
         <input
-          type="text"
+          type="number"
           id="systolic"
           name="systolic"
           value={newHeartData.systolic}

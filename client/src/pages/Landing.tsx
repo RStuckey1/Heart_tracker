@@ -28,7 +28,7 @@ const Landing = () => {
               <h1>Welcome to your Heart-Tracker</h1>
             </div>
             <div className="links">
-              <h3><Link to="/DisplayHeartData">See your Data</Link></h3>
+              <h3><Link to="/DisplayRecords">See your Data</Link></h3>
               <h3><Link to="/NewHeartData">Enter a New Data</Link></h3>
             </div>
           </>
