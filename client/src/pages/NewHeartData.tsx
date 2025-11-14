@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { createHeart as createHeartAPI } from '../api/HeartAPI.tsx';
 import type { HeartData } from '../interfaces/HeartData.tsx';
 import { useAuth } from '../context/AuthContext.tsx';
+import "../CSS/NewHeartData.css"
 
 const NewHeartData = () => {
   const { User: loggedInUser, loading } = useAuth();
@@ -35,20 +36,9 @@ const NewHeartData = () => {
       return;
     }
     
-    // Convert time string to Date object
-    const timeString = typeof newHeartData.time === 'string' ? newHeartData.time : newHeartData.time.toTimeString().split(' ')[0].substring(0, 5);
-    const [hours, minutes] = timeString.split(':');
-    const timeDate = new Date();
-    timeDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-    
-    const dataToSubmit = {
-      ...newHeartData,
-      time: timeDate
-    };
-    
-    console.log('Submitting heart data:', JSON.stringify(dataToSubmit, null, 2));
+    console.log('Submitting heart data:', JSON.stringify(newHeartData, null, 2));
     try {
-      const data = await createHeartAPI(dataToSubmit);
+      const data = await createHeartAPI(newHeartData);
       console.log('Heart Data created successfully:', data);
       console.log('Navigating to /DisplayRecords');
       navigate('/DisplayRecords');

@@ -38,11 +38,11 @@ export function HeartFactory(sequelize: Sequelize): typeof Heart {
         primaryKey: true,
       },
       date: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
       time: {
-        type: DataTypes.DATE,
+        type: DataTypes.TIME,
         allowNull: false,
       },
       systolic: {
@@ -58,7 +58,7 @@ export function HeartFactory(sequelize: Sequelize): typeof Heart {
         allowNull: false,
       },
       weight: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(5, 1),
         allowNull: false,
       },
       UserId: {
