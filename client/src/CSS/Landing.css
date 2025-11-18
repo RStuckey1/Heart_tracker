@@ -65,3 +65,12 @@ button.landbtn2{
   color: #FFFFFC;
   align-self:center;
 }
+
+.welcome {
+  width:100vw;
+  height:auto;
+}
+
+.welcome>h1 {
+  text-align: center;
+}
