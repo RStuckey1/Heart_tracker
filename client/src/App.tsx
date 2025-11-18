@@ -12,8 +12,9 @@ function App() {
         <div className="container">
           <Outlet />
         </div>
-
+        <div className="footer">
         <Footer />
+        </div>
       
     </>
   );

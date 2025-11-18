@@ -8,18 +8,10 @@
   background-color: #1D3461
 }
 
-.navbar-logo>img {
-  display:flex;
-  float:left;
-  margin:1% 2%;
-}
-
 .navbar-logo>ul {
   width:60%;
   display:flex;
-  flex-direction: row;
   list-style: none;
-  justify-content: left;
   overflow: hidden;
   color: #fcf7f8;
 }
@@ -33,15 +25,12 @@
 .navbar-logo>h1 {
   font-size: 3rem;
   color: #fcf7f8;
+  text-align: center;
 
 }
 
 #root > div.App > nav > div > ul > li > a {
   font-size: 2rem;
-  margin:10%;
-  padding:5%;
-  justify-content: center;
-  text-align: center;
   color: #fcf7f8;
 }
 

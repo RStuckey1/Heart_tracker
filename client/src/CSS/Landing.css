@@ -1,26 +1,67 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+line-height: 1.5;
+font-weight: 400;
+color:#13315C;
+font-synthesis: none;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 }
 
 .landing {
+  display:flex;
   width:100%;
   height: auto;
 }
 
 .container>h1 {
-  font-size: 2.5rem;
+  font-size: 6rem;
+  margin:5%5%;
   text-align: center;
   font-family:Arial, Helvetica, sans-serif;
 
+}
+
+.container>h2 {
+  font-size: 3rem;
+  margin:5%5%;
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+
+}
+
+.container>h3 {
+  font-size: 2rem;
+  margin:5%5%;
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+
+}
+
+.container>h4 {
+  font-size: 1.5rem;
+  margin:5%5%;
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+
+}
+
+button.landbtn1{
+  display:flex;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  background-color:#13315C;
+  color: #FFFFFC;
+  align-self:center;
+}
+
+button.landbtn2{
+  display:flex;
+  margin: 2% auto 2% auto;
+  text-align: center;
+  background-color:#13315C;
+  color: #FFFFFC;
+  align-self:center;
 }

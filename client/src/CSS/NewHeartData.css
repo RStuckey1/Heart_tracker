@@ -4,7 +4,15 @@ width:100%;
 height:auto;
 }
 
-#root > div.container > div > h2 {
-font-size:2em;
+#root > div.container > .container-newHeartData > h2 {
+font-size:3em;
 color:yellow;
+text-align: center;
+}
+
+#root > div.container > .container-newHeartData > h3 {
+font-size:2em;
+color:aquamarine;
+text-align: center;
+
 }

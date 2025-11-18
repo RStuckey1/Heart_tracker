@@ -72,7 +72,8 @@ const NewHeartData = () => {
 
   return (
     <div className="container-newHeartData">
-      <h2>Enter your Data</h2>
+      <h2>Enter your Daily Data</h2>
+      <h3>Blood Pressure(Required), Pulse(Required), and Weight(optional)</h3>
       <button onClick={() => navigate('/DisplayRecords')}>Back to your records</button>
       <form className="form-newHeartData" onSubmit={handleSubmit}>
         <label htmlFor="Date">Date</label>

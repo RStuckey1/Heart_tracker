@@ -10,14 +10,14 @@ const Landing = () => {
       {!isLoggedIn ? (
       <div className="container">
         <h1>Heart-Tracker</h1>
-        <h1>The place for tracking data of Congestive Heart Failure Patients</h1>
-        <h2>No more entering data for vitals in multiple places. One place, all the data. Cardiologists will be efficently able to help you with thid data conviently available to see!</h2>
-        <h3>To get started, please login or create an account</h3>
+        <h2>Easy tool for tracking data of Congestive Heart Failure Patients</h2>
+        <h3>No more entering data for vitals in multiple places. One place, all the data. Cardiologists will be able to see your data with your permission and help you live a long and happy life!</h3>
+        <h4>To get started, please login or create an account</h4>
           <>
-            <button className="landbtn" type="button">
+            <button className="landbtn1" type="button">
               <h3><Link to="/login">Login</Link></h3>
             </button>
-            <button className="landbtn" type="button">
+            <button className="landbtn2" type="button">
               <h3><Link to="/signup">New User</Link></h3>
             </button>
           </>

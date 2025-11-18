@@ -33,7 +33,13 @@ const DisplayRecords: React.FC = () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    setHeartDataList(data);
+    // Sort by date and time in reverse chronological order (newest first)
+    const sortedData = data.sort((a: HeartData, b: HeartData) => {
+      const dateA = new Date(a.date + 'T' + a.time);
+      const dateB = new Date(b.date + 'T' + b.time);
+      return dateB.getTime() - dateA.getTime();
+    });
+    setHeartDataList(sortedData);
     } catch (error) {
     console.error('Error fetching heart data:', error);
     } finally {
@@ -115,7 +121,10 @@ const DisplayRecords: React.FC = () => {
     <tbody>
       {heartDataList.map((record) => {
         const isEditing = editingId === record.id;
-        const recordDate = new Date(record.date);
+        // Handle date without timezone issues
+        const dateStr = typeof record.date === 'string' ? record.date : record.date.toISOString();
+        const dateParts = dateStr.split('T')[0]; // Get YYYY-MM-DD
+        const recordDate = new Date(dateParts + 'T00:00:00');
         const timeDisplay = record.time.substring(0, 5);
         
         if (isEditing && editFormData) {

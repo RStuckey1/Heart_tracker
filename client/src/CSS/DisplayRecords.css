@@ -8,14 +8,6 @@
   padding: 1%
 }
 
-.display-records>p {
-  color: #fcf7f8;
-  font-size: 2.5rem;
-  font-weight: 600;
-  text-align: center;
-  margin: 4% auto 4% auto;
-}
-
 .display-records h2 {
   color: #fcf7f8;
   font-size: 2rem;
@@ -42,15 +34,24 @@
 .display-records tr:nth-child(even) {
    background-color: #1D3461;
    color: #fcf7f8;
+   font-weight: bold;
 }
 
 .display-records tr:nth-child(odd) {
   background-color: #fcf7f8;
   color:#1D3461;
+  font-weight: bold;
 }
 .display-records tr:hover {
   background-color: #a31621;
 }
 
+#root>div.container>div>table>tbody>tr:nth-child(odd)>td:nth-child(odd)>button:nth-child(odd) {
+  border:3px solid black;
+}
+
+#root>div.container>div>table>tbody>tr:nth-child(even)>td:nth-child(even)>button:nth-child(even) {
+  border:3px solid yellow;
+}
 
 
