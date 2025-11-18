@@ -3,7 +3,7 @@ import Auth from '../utils/auth';
 import { loginauth } from '../api/authAPI';
 import { useNavigate } from 'react-router-dom';
 import type { UserLogin } from '../interfaces/UserLogin';
-import "../index.css";
+import "../CSS/Login.css";
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
@@ -44,7 +44,7 @@ const Login = () => {
     <div className="form-container1">
       <h2>Welcome to Heart Tracker</h2>
       <h2>Please Login</h2>
-      <form className="form login-form" onSubmit={handleSubmit}>
+      <form className="form-login-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Username</label>
           <input
@@ -65,21 +65,20 @@ const Login = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group1">
-          <button className="user-login" type="submit">
-            Login
-          </button>
-        </div>
-      </form>
-      <div className="new-login">
-        <button
+        
+        <div className="form-button">
+        <button className="user-login" type="submit">
+          Login
+        </button>
+         <button
           className="new-login"
           type="button"
           onClick={() => navigate('/signup')}
         >
           New User Click Here
         </button>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };

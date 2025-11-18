@@ -11,6 +11,8 @@
 .navbar-logo>ul {
   width:60%;
   display:flex;
+  margin: 0 auto 0 auto;
+  justify-content: space-evenly;
   list-style: none;
   overflow: hidden;
   color: #fcf7f8;
