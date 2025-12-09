@@ -20,7 +20,7 @@
 
 .navbar-logo>li {
   color: #fcf7f8;
-  font-size:1rem;
+  font-size:rem;
   
 }
 
@@ -31,15 +31,19 @@
 
 }
 
-#root > div.App > nav > div > ul > li > a {
-  font-size: 2rem;
-  color: #fcf7f8;
+.dropbtn {
+  color:#fcf7f8;
+  font-size: 3.5rem;
+  text-decoration: none;
 }
 
-li a:hover,
+li a.one:hover,
 .dropdown:hover .dropbtn {
   background-color: #1D3461;
   border: 2px solid #fcf7f8;
+  color: #fcf7f8;
+  text-decoration: none;
+  font-size: 2rem;
   border-radius: 10px;
 
 }
@@ -65,14 +69,15 @@ li.dropdown {
   display: block;
 }
 
-.dropdown-content a:visited {
+a.one:visited {
   color: #fcf7f8;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  font-size: 2rem;
 }
 
-.dropdown-content a:hover {
+a.one:hover {
   background-color: #fcf7f8;
   color:#000000;
 }

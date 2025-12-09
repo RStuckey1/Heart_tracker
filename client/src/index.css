@@ -10,7 +10,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+a.one {
   font-weight: 500;
   color: #FFFFFC;
   text-decoration: inherit;
@@ -47,6 +47,7 @@ button:hover {
   border: 6px solid #D15E0E;
   
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

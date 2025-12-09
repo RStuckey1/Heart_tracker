@@ -20,6 +20,15 @@ const DisplayRecords: React.FC = () => {
   const [editingId, setEditingId] = React.useState<number | null>(null);
   const [editFormData, setEditFormData] = React.useState<HeartData | null>(null);
 
+  // Format time to 12-hour format with AM/PM
+  const formatTimeWithAmPm = (time: string): string => {
+    const [hours, minutes] = time.split(':');
+    const hour = parseInt(hours, 10);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12; // Convert 0 to 12 for midnight
+    return `${displayHour}:${minutes} ${ampm}`;
+  };
+
   React.useEffect(() => {
   const fetchHeartData = async () => {
     try {
@@ -105,7 +114,7 @@ const DisplayRecords: React.FC = () => {
 
   return (
   <div className='display-records'>
-    <h2>Heart Data Records</h2>
+    <h2>Heart-Tracker Data</h2>
     <table>
     <thead>
       <tr>
@@ -115,7 +124,7 @@ const DisplayRecords: React.FC = () => {
       <th>Diastolic</th>
       <th>Pulse</th>
       <th>Weight</th>
-      <th>Actions</th>
+      <th>Edit/Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -125,20 +134,20 @@ const DisplayRecords: React.FC = () => {
         const dateStr = typeof record.date === 'string' ? record.date : record.date.toISOString();
         const dateParts = dateStr.split('T')[0]; // Get YYYY-MM-DD
         const recordDate = new Date(dateParts + 'T00:00:00');
-        const timeDisplay = record.time.substring(0, 5);
+        const timeDisplay = formatTimeWithAmPm(record.time.substring(0, 5));
         
         if (isEditing && editFormData) {
           return (
             <tr key={record.id}>
-              <td><input type="date" value={typeof editFormData.date === 'string' ? editFormData.date : new Date(editFormData.date).toISOString().split('T')[0]} onChange={(e) => handleEditChange(e, 'date')} /></td>
-              <td><input type="time" value={editFormData.time.substring(0, 5)} onChange={(e) => handleEditChange(e, 'time')} /></td>
-              <td><input type="number" value={editFormData.systolic} onChange={(e) => handleEditChange(e, 'systolic')} /></td>
-              <td><input type="number" value={editFormData.diastolic} onChange={(e) => handleEditChange(e, 'diastolic')} /></td>
-              <td><input type="number" value={editFormData.pulse} onChange={(e) => handleEditChange(e, 'pulse')} /></td>
-              <td><input type="number" step="0.1" value={editFormData.weight} onChange={(e) => handleEditChange(e, 'weight')} /></td>
+              <td><input type="date" className="edit-input" value={typeof editFormData.date === 'string' ? editFormData.date : new Date(editFormData.date).toISOString().split('T')[0]} onChange={(e) => handleEditChange(e, 'date')} /></td>
+              <td><input type="time" className="edit-input" value={editFormData.time.substring(0, 5)} onChange={(e) => handleEditChange(e, 'time')} /></td>
+              <td><input type="number" className="edit-input" value={editFormData.systolic} onChange={(e) => handleEditChange(e, 'systolic')} /></td>
+              <td><input type="number" className="edit-input" value={editFormData.diastolic} onChange={(e) => handleEditChange(e, 'diastolic')} /></td>
+              <td><input type="number" className="edit-input" value={editFormData.pulse} onChange={(e) => handleEditChange(e, 'pulse')} /></td>
+              <td><input type="number" className="edit-input" step="0.1" value={editFormData.weight} onChange={(e) => handleEditChange(e, 'weight')} /></td>
               <td>
-                <button onClick={handleSaveEdit}>Save</button>
-                <button onClick={handleCancelEdit}>Cancel</button>
+                <button className="edit-button save-button" onClick={handleSaveEdit}>Save</button>
+                <button className="edit-button cancel-button" onClick={handleCancelEdit}>Cancel</button>
               </td>
             </tr>
           );

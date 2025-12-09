@@ -8,22 +8,23 @@
   padding: 1%
 }
 
-.display-records h2 {
-  color: #fcf7f8;
-  font-size: 2rem;
+.display-records>h2 {
+  color: #13315C;
+  font-size: 3rem;
   font-weight: 600;
-  margin-bottom: 20px;
 }
 
 .display-records table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .display-records th, .display-records td {
   border: 1px solid #000000;
   padding: 2%;
   text-align: center;
+  white-space: nowrap;
 }
 
 .display-records th {
@@ -46,12 +47,93 @@
   background-color: #a31621;
 }
 
-#root>div.container>div>table>tbody>tr:nth-child(odd)>td:nth-child(odd)>button:nth-child(odd) {
-  border:3px solid black;
+#root > div.container > div > table > tbody > tr > td {
+  font-size: 1rem;;
 }
 
-#root>div.container>div>table>tbody>tr:nth-child(even)>td:nth-child(even)>button:nth-child(even) {
-  border:3px solid yellow;
+/* Edit mode input styling */
+.edit-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #13315C;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #1D3461;
+  box-sizing: border-box;
+  text-overflow: clip;
+  overflow: visible;
+  text-align: center;
+  
 }
 
+.edit-input[type="time"] {
+  min-width: 140px;
+}
+
+.edit-input:focus {
+  outline: 2px solid #DE9151;
+  border-color: #DE9151;
+}
+
+.edit-button {
+  padding: 6px 12px;
+  margin: 4px 4px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.save-button {
+  background-color: #386641;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #386641;
+}
+
+.cancel-button {
+  background-color: #386641;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #386641;
+}
+
+.edits>table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.display-records th, .display-records td {
+  border: 1px solid #000000;
+  padding: 2%;
+  text-align: center;
+  
+}
+
+.display-records th {
+  background-color: #DE9151;
+  font-weight: bold;
+}
+
+.display-records tr:nth-child(even) {
+   background-color: #1D3461;
+   color: #fcf7f8;
+   font-weight: bold;
+}
+
+.display-records tr:nth-child(odd) {
+  background-color: #fcf7f8;
+  color:#1D3461;
+  font-weight: bold;
+}
+.display-records tr:hover {
+  background-color: #a31621;
+}
 

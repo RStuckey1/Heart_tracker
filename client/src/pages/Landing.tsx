@@ -23,15 +23,13 @@ const Landing = () => {
           </>
         </div>
         ) : (
-          <>
-            <div className="welcome">
-              <h1>Welcome to your Heart-Tracker</h1>
+          <div className="welcome">
+            <h1>Welcome to your Heart-Tracker</h1>
+            <div className="welcome-links">         
+              <Link className="two" to="/DisplayRecords">See your Data</Link>
+              <Link className="two" to="/NewHeartData">Enter a New Data</Link>
             </div>
-            <div className="links">
-              <h3><Link to="/DisplayRecords">See your Data</Link></h3>
-              <h3><Link to="/NewHeartData">Enter a New Data</Link></h3>
-            </div>
-          </>
+          </div>
         )}
       </div>
     
