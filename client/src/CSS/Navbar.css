@@ -5,11 +5,13 @@
 
 
 .navbar-logo {
-  background-color: #1D3461
+  background-color: #1D3461;
+  height:100px;  
+
 }
 
-.navbar-logo>ul {
-  width:60%;
+.nav {
+  width:100%;
   display:flex;
   margin: 0 auto 0 auto;
   justify-content: space-evenly;
@@ -18,11 +20,30 @@
   color: #fcf7f8;
 }
 
-.navbar-logo>li {
+.nav>ul {
   color: #fcf7f8;
   font-size:rem;
   
 }
+
+.nav a {
+  color: #fcf7f8;
+  text-decoration: none;
+}
+
+.nav a:visited {
+  color: #fcf7f8;
+}
+
+.nav a:hover {
+  color: #d15e0e;
+}
+
+a.two:visited {
+  color:#fcf7f8;
+  
+}
+
 
 .navbar-logo>h1 {
   font-size: 3rem;
@@ -41,7 +62,7 @@ li a.one:hover,
 .dropdown:hover .dropbtn {
   background-color: #1D3461;
   border: 2px solid #fcf7f8;
-  color: #fcf7f8;
+  color: #d15e0e;
   text-decoration: none;
   font-size: 2rem;
   border-radius: 10px;
@@ -79,7 +100,7 @@ a.one:visited {
 
 a.one:hover {
   background-color: #fcf7f8;
-  color:#000000;
+  color: #d15e0e;
 }
 
 .dropdown:hover .dropdown-content {

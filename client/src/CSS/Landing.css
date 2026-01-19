@@ -19,6 +19,7 @@ text-rendering: optimizeLegibility;
   font-size: 6rem;
   margin:5%5%;
   text-align: center;
+  text-transform:capitalize;
   font-family:Arial, Helvetica, sans-serif;
 
 }
@@ -26,6 +27,7 @@ text-rendering: optimizeLegibility;
 .container>h2 {
   font-size: 3rem;
   margin:5%5%;
+  text-transform:capitalize;
   text-align: center;
   font-family:Arial, Helvetica, sans-serif;
 
@@ -35,6 +37,7 @@ text-rendering: optimizeLegibility;
   font-size: 2rem;
   margin:5%5%;
   text-align: center;
+  text-transform: capitalize;
   font-family:Arial, Helvetica, sans-serif;
 
 }
@@ -43,6 +46,7 @@ text-rendering: optimizeLegibility;
   font-size: 1.5rem;
   margin:5%5%;
   text-align: center;
+  text-transform: capitalize;
   font-family:Arial, Helvetica, sans-serif;
 
 }
@@ -55,6 +59,17 @@ button.landbtn1{
   background-color:#13315C;
   color: #FFFFFC;
   align-self:center;
+  border: 2px solid transparent;
+}
+
+button.landbtn1 a,
+button.landbtn1 a:visited {
+  color: #fcf7f8;
+  text-decoration: none;
+}
+
+button.landbtn1 a:hover {
+  color: #d15e0e;
 }
 
 button.landbtn2{
@@ -64,6 +79,17 @@ button.landbtn2{
   background-color:#13315C;
   color: #FFFFFC;
   align-self:center;
+  border: 2px solid transparent;
+}
+
+button.landbtn2 a,
+button.landbtn2 a:visited {
+  color: #fcf7f8;
+  text-decoration: none;
+}
+
+button.landbtn2 a:hover {
+  color: #d15e0e;
 }
 
 .welcome {
@@ -89,11 +115,15 @@ button.landbtn2{
 .two {
   text-decoration: none;
   text-align: center;
-  color: #13315c;
+  color: #fcf7f8;
+}
+
+.two:visited {
+  color: #fcf7f8;
 }
 
 .two:hover {
   text-align: center;
   text-decoration: none;
-  color: #13315c;
+  color: #d15e0e;
 }

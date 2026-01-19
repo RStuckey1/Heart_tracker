@@ -26,10 +26,10 @@ const CustomNavbar = () => {
 
         {!isLoggedIn ? (
           <div className="navbar-logo">
-            <ul>
-              <li><Link to="/Landing">Heart Data</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/signup">Signup</Link></li>
+            <ul className="nav">
+              <a className="two" href="#"><Link to="/Landing">Heart Data</Link></a>
+              <a className="two" href="#"><Link to="/login">Login</Link></a>
+              <a className="two" href="#"><Link to="/signup">Signup</Link></a>
             </ul>
           </div>
         ) : (
