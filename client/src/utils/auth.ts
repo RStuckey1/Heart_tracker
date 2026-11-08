@@ -15,11 +15,12 @@ class AuthService {
     try {
       const decoded = jwtDecode<JwtPayload>(token);
 
-      if (decoded?.exp && decoded?.exp < Date.now() / 1000) {
-        return false;
+      if (!decoded?.exp || decoded.exp < Date.now() / 1000) {
+        return true;
       }
-    } catch (err) {
       return false;
+    } catch {
+      return true;
     }
   }
 

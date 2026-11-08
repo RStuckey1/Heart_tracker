@@ -93,9 +93,9 @@ const createHeart = async (body: HeartData) => {
 
     return data;
 
-  } catch (err: any) {
+  } catch (err) {
     console.error('Error from heart data Creation:', err);
-    return Promise.reject(err.message || 'Could not create heart data');
+    return Promise.reject(err instanceof Error ? err.message : 'Could not create heart data');
   }
 }
 

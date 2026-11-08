@@ -203,6 +203,41 @@ p {
   margin: 0;
 }
 
+.birthday-banner {
+  display: flex;
+  width: min(1120px, calc(100% - 48px));
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px auto -24px;
+  padding: 11px 15px;
+  border: 1px solid #f0c7cc;
+  border-radius: 9px;
+  background: #fff4f5;
+  color: #842b37;
+  font-size: 0.92rem;
+  font-weight: 680;
+}
+
+.birthday-banner button {
+  display: grid;
+  width: 36px;
+  min-height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.birthday-banner button:hover {
+  background: #f9e3e6;
+}
+
 .error-page {
   max-width: 700px;
   margin: 30px auto;
@@ -220,6 +255,11 @@ p {
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .birthday-banner {
+    width: calc(100% - 32px);
+    margin: 14px auto -18px;
   }
 }
 

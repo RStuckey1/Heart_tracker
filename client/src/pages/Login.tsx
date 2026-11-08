@@ -4,7 +4,7 @@ import { loginauth } from '../api/authAPI';
 import { useNavigate } from 'react-router-dom';
 import type { UserLogin } from '../interfaces/UserLogin';
 import "../CSS/Login.css";
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,7 +18,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-  const { setIsLoggedIn, checkLogin } = useAuth();
+  const { checkLogin } = useAuth();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -34,8 +34,7 @@ const Login = () => {
     try {
       const data = await loginauth(loginData);
       Auth.login(data.token);
-      setIsLoggedIn(true);
-      checkLogin();
+      await checkLogin();
       navigate('/Landing', { replace: true });
     } catch (err) {
       console.error('Failed to login', err);

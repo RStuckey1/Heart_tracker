@@ -8,7 +8,9 @@ import Landing from "./pages/Landing";
 import NewHeartData from "./pages/NewHeartData.tsx";
 import Signup from "./pages/Signup";
 import DisplayRecords from "./pages/DisplayRecords.tsx"
-import { AuthProvider } from "./context/AuthContext";
+import Journal from "./pages/Journal.tsx";
+import Settings from "./pages/Settings.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
 import './index.css'
 
 
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: 'DisplayRecords',
         element: <DisplayRecords />
+      },
+      {
+        path: 'journal',
+        element: <Journal />
+      },
+      {
+        path: 'settings',
+        element: <Settings />
       },
       {
         path: 'ErrorPage',

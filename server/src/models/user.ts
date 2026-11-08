@@ -8,10 +8,12 @@ interface IUser {
   first_name: string;
   last_name: string;
   age: number;
+  birthday: string | null;
+  lastBirthdayGreeting: string | null;
   password: string;
 }
 
-interface UserCreationAttributes extends Optional<IUser, "id"> {}
+interface UserCreationAttributes extends Optional<IUser, "id" | "birthday" | "lastBirthdayGreeting"> {}
 
 export class User extends Model<IUser, UserCreationAttributes> implements IUser {
   public id!: number;
@@ -20,6 +22,8 @@ export class User extends Model<IUser, UserCreationAttributes> implements IUser 
   public first_name!: string;
   public last_name!: string;
   public age!: number;
+  public birthday!: string | null;
+  public lastBirthdayGreeting!: string | null;
   public password!: string;
 
   public async setPassword(password: string) {
@@ -55,6 +59,15 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       age: {
         type: DataTypes.INTEGER,
         allowNull: true,
+      },
+      birthday: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+      },
+      lastBirthdayGreeting: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+        field: "last_birthday_greeting",
       },
       password: {
         type: DataTypes.STRING,

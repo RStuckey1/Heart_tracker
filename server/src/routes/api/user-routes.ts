@@ -6,8 +6,15 @@ import {
   updateUser,
   deleteUser,
 } from "../../controllers/usersControllers.js";
+import {
+  getAccountProfile,
+  updateAccountProfile,
+} from "../../controllers/accountController.js";
 
 const router = express.Router();
+
+router.get("/settings", getAccountProfile);
+router.put("/settings", updateAccountProfile);
 
 router.get("/", getUser);
 

@@ -3,7 +3,7 @@ import Auth from "../utils/auth";
 import { signUp } from "../api/authAPI";
 import type { UserLogin } from "../interfaces/UserLogin";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import "../CSS/Login.css";
 
 const SignUp = () => {
@@ -16,6 +16,7 @@ const SignUp = () => {
     first_name: "",
     last_name: "",
     age: 0,
+    birthday: "",
     password: "",
   });
   const handleChange = (
@@ -36,7 +37,7 @@ const SignUp = () => {
     try {
       const data = await signUp(userData);
       Auth.login(data.token);
-      checkLogin();
+      await checkLogin();
       navigate('/Landing', { replace: true });
     } catch (err) {
       console.error("Failed to create user", err);
@@ -101,14 +102,13 @@ const SignUp = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="signup-age">Age</label>
+          <label htmlFor="signup-birthday">Birthday</label>
           <input
             className="form-input"
-            type="number"
-            name="age"
-            id="signup-age"
-            min="1"
-            max="120"
+            type="date"
+            name="birthday"
+            id="signup-birthday"
+            max={new Date().toISOString().slice(0, 10)}
             required
             onChange={handleChange}
           />

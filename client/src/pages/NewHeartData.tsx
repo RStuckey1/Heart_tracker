@@ -3,7 +3,7 @@ import type { FormEvent, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createHeart as createHeartAPI } from '../api/HeartAPI.tsx';
 import type { HeartData } from '../interfaces/HeartData.tsx';
-import { useAuth } from '../context/AuthContext.tsx';
+import { useAuth } from '../context/useAuth';
 import "../CSS/NewHeartData.css"
 
 const formatLocalDate = (date: Date): string => {
