@@ -1,55 +1,46 @@
 import { useAuth } from '../context/AuthContext';
 import auth from "../utils/auth";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { Link } from 'react-router-dom';
-import "../index.css";
+import { Link, useNavigate } from 'react-router-dom';
 import "../CSS/Navbar.css";
 
 const CustomNavbar = () => {
-  const { isLoggedIn, checkLogin, User, loading } = useAuth(); // Include loading state
-  const navigate = useNavigate(); // Initialize navigate
+  const { isLoggedIn, checkLogin, User, loading } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    auth.logout(false); // Prevent redirection by AuthService
-    checkLogin(); // Update the login state
-    navigate('/Landing'); // Redirect to the landing page
+    auth.logout(false);
+    checkLogin();
+    navigate('/Landing');
   };
 
   if (loading) {
-    // Show a loading indicator or nothing while loading
     return null;
   }
 
   return (
-    <>
-      <nav>
-
-        {!isLoggedIn ? (
-          <div className="navbar-logo">
-            <ul>
-              <li><Link to="/Landing">Heart Data</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/signup">Signup</Link></li>
-            </ul>
-          </div>
-        ) : (
-          <div className="navbar-logo">
-            <h1>{`Welcome, ${User?.username || 'User'}`}</h1>
-            <ul>
-              <li className="dropdown">
-              <a href="javascript:void(0)" className="dropbtn">Menu</a>
-              <div className="dropdown-content">
-              <a className="one" href="#"><Link to="/Landing">Home</Link></a>
-              <a className="one" href="#"><Link to="/DisplayRecords">Your Data</Link></a>
-              <a className="one" href="#"><Link to="/NewHeartData">New Entry</Link></a>
-              <a className="one" href="#"><button onClick={handleLogout}>Logout</button></a>
-              </div>
-              </li>
-            </ul>
-          </div>
-        )}
+    <header className="site-header">
+      <nav className="navbar-inner" aria-label="Main navigation">
+        <Link className="brand" to="/Landing">
+          <span className="brand-mark" aria-hidden="true">♥</span>
+          <span>Heart Tracker</span>
+        </Link>
+        <ul className="navbar-links">
+          {isLoggedIn ? (
+            <>
+              <li className="nav-welcome">Hello, {User?.username || 'there'}</li>
+              <li><Link to="/DisplayRecords">My readings</Link></li>
+              <li><Link to="/NewHeartData">Add reading</Link></li>
+              <li><button className="nav-logout" type="button" onClick={handleLogout}>Log out</button></li>
+            </>
+          ) : (
+            <>
+              <li><Link to="/login">Log in</Link></li>
+              <li><Link className="button" to="/signup">Create account</Link></li>
+            </>
+          )}
+        </ul>
       </nav>
-    </>
+    </header>
   );
 };
 

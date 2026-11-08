@@ -7,6 +7,7 @@ import "../CSS/Login.css";
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState('');
   const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
     email: '',
@@ -17,7 +18,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-  const { setIsLoggedIn, checkLogin } = useAuth(); // Include checkLogin from AuthContext
+  const { setIsLoggedIn, checkLogin } = useAuth();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -29,57 +30,62 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
     try {
       const data = await loginauth(loginData);
       Auth.login(data.token);
-      setIsLoggedIn(true); // Update global login state
-      checkLogin(); // Trigger checkLogin to update User state
+      setIsLoggedIn(true);
+      checkLogin();
       navigate('/Landing', { replace: true });
     } catch (err) {
       console.error('Failed to login', err);
+      setErrorMessage('We could not log you in. Check your username and password, then try again.');
     }
   };
 
   return (
-    <div className="form-container1">
-      <h2>Welcome to Heart Tracker</h2>
-      <h2>Please Login</h2>
-      <form className="form-login-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Username</label>
+    <section className="auth-page">
+      <div className="auth-card">
+        <p className="eyebrow">Welcome back</p>
+        <h1>Log in to Heart Tracker</h1>
+        <p className="auth-intro">Access your health journal and keep your readings up to date.</p>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          {errorMessage && <p className="auth-error" role="alert">{errorMessage}</p>}
+          <div className="form-group form-group-full">
+          <label htmlFor="username">Username</label>
           <input
             className="form-input"
             type="text"
             name="username"
+            id="username"
+            autoComplete="username"
+            required
             value={loginData.username || ''}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
+          </div>
+          <div className="form-group form-group-full">
+          <label htmlFor="password">Password</label>
           <input
             className="form-input"
             type="password"
             name="password"
+            id="password"
+            autoComplete="current-password"
+            required
             value={loginData.password || ''}
             onChange={handleChange}
           />
-        </div>
-        
-        <div className="form-button">
-        <button className="user-login" type="submit">
-          Login
-        </button>
-         <button
-          className="new-login"
-          type="button"
-          onClick={() => navigate('/signup')}
-        >
-          New User Click Here
-        </button>
-        </div>
-      </form>
-    </div>
+          </div>
+          <div className="auth-actions">
+            <button className="button" type="submit">Log in</button>
+            <button className="button button-secondary" type="button" onClick={() => navigate('/signup')}>
+              Create an account
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 

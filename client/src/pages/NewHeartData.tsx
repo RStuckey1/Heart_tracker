@@ -6,6 +6,11 @@ import type { HeartData } from '../interfaces/HeartData.tsx';
 import { useAuth } from '../context/AuthContext.tsx';
 import "../CSS/NewHeartData.css"
 
+const formatLocalDate = (date: Date): string => {
+  const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60_000);
+  return localDate.toISOString().split('T')[0];
+};
+
 const NewHeartData = () => {
   const { User: loggedInUser, loading } = useAuth();
   const navigate = useNavigate();
@@ -55,7 +60,7 @@ const NewHeartData = () => {
       if (!prev) return prev;
       
       if (name === 'date') {
-        return { ...prev, date: new Date(value) };
+        return { ...prev, date: new Date(`${value}T00:00:00`) };
       } else if (name === 'time') {
         return { ...prev, time: value };
       } else if (name === 'systolic' || name === 'diastolic' || name === 'pulse' || name === 'weight') {
@@ -67,72 +72,102 @@ const NewHeartData = () => {
   };
 
   if (loading || !newHeartData) {
-    return <p>Loading...</p>;
+    return <p className="loading-message" role="status">Preparing your entry…</p>;
   }
 
   return (
-    <div className="container-newHeartData">
-      <h2>Enter your Daily Data</h2>
-      <h3>Blood Pressure(Required), Pulse(Required), and Weight(optional)</h3>
-      <button onClick={() => navigate('/DisplayRecords')}>Back to your records</button>
-      <form className="form-newHeartData" onSubmit={handleSubmit}>
-        <label htmlFor="Date">Date</label>
-        <input
-          type="date"
-          id="Date"
-          name="date"
-          value={newHeartData.date instanceof Date ? newHeartData.date.toISOString().split('T')[0] : ''}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="time">Time</label>
-        <input
-          type="time"
-          id="time"
-          name="time"
-          value={typeof newHeartData.time === 'string' ? newHeartData.time : ''}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="systolic">Systolic</label>
-        <input
-          type="number"
-          id="systolic"
-          name="systolic"
-          value={newHeartData.systolic}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="diastolic">Diastolic</label>
-        <input
-          type="number"
-          id="diastolic"
-          name="diastolic"
-          value={newHeartData.diastolic}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="pulse">Pulse</label>
-        <input
-          type="number"
-          id="pulse"
-          name="pulse"
-          value={newHeartData.pulse}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="weight">Weight</label>
-        <input
-          type="number"
-          id="weight"
-          name="weight"
-          value={newHeartData.weight}
-          onChange={handleChange}
-        />
-
-        <button className="newHeartDataButton" type="submit">Submit New Data</button>
-      </form>
-    </div>
+    <section className="reading-form-page">
+      <p className="eyebrow">Daily health journal</p>
+      <h1 className="page-title">Add a reading</h1>
+      <p className="page-description">Enter the measurements you want to keep with your records. You can update or remove an entry later.</p>
+      <div className="reading-form-card card">
+        <p className="reading-form-note">Date, time, blood pressure, and pulse are required. Weight is optional.</p>
+        <form className="reading-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="date">Date</label>
+            <input
+              className="form-input"
+              type="date"
+              id="date"
+              name="date"
+              required
+              value={newHeartData.date instanceof Date ? formatLocalDate(newHeartData.date) : ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="time">Time</label>
+            <input
+              className="form-input"
+              type="time"
+              id="time"
+              name="time"
+              required
+              value={typeof newHeartData.time === 'string' ? newHeartData.time : ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="systolic">Systolic <span>(mmHg)</span></label>
+            <input
+              className="form-input"
+              type="number"
+              id="systolic"
+              name="systolic"
+              min="1"
+              required
+              value={newHeartData.systolic || ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="diastolic">Diastolic <span>(mmHg)</span></label>
+            <input
+              className="form-input"
+              type="number"
+              id="diastolic"
+              name="diastolic"
+              min="1"
+              required
+              value={newHeartData.diastolic || ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="pulse">Pulse <span>(bpm)</span></label>
+            <input
+              className="form-input"
+              type="number"
+              id="pulse"
+              name="pulse"
+              min="1"
+              required
+              value={newHeartData.pulse || ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="weight">Weight <span>(optional)</span></label>
+            <input
+              className="form-input"
+              type="number"
+              id="weight"
+              name="weight"
+              min="0"
+              step="0.1"
+              value={newHeartData.weight || ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="reading-form-actions">
+            <button className="button button-secondary" type="button" onClick={() => navigate('/DisplayRecords')}>
+              Back to my readings
+            </button>
+            <button className="button" type="submit">Save reading</button>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { deleteHeart, updateHeart } from '../api/HeartAPI';
 import Auth from '../utils/auth';
 import '../CSS/DisplayRecords.css';
+import { Link } from 'react-router-dom';
+import type { HeartData as HeartDataPayload } from '../interfaces/HeartData';
 
 type HeartData = {
   id: number;
@@ -92,11 +94,16 @@ const DisplayRecords: React.FC = () => {
   const handleSaveEdit = async () => {
     if (!editFormData || !editingId) return;
     try {
-      const dataToSave = {
-        ...editFormData,
-        date: typeof editFormData.date === 'string' ? new Date(editFormData.date) : editFormData.date
+      const dataToSave: HeartDataPayload = {
+        date: typeof editFormData.date === 'string' ? new Date(editFormData.date) : editFormData.date,
+        time: editFormData.time,
+        systolic: editFormData.systolic,
+        diastolic: editFormData.diastolic,
+        pulse: editFormData.pulse,
+        weight: editFormData.weight,
+        UserId: editFormData.UserId,
       };
-      await updateHeart(editingId, dataToSave as any);
+      await updateHeart(editingId, dataToSave);
       setHeartDataList(heartDataList.map(item => 
         item.id === editingId ? editFormData : item
       ));
@@ -109,26 +116,43 @@ const DisplayRecords: React.FC = () => {
   };
 
   if (loading) {
-  return <div className='display-records'>Loading...</div>;
+  return <div className='records-loading' role="status">Loading your readings…</div>;
   }
 
   return (
-  <div className='display-records'>
-    <h2>Heart-Tracker Data</h2>
-    <table>
-    <thead>
-      <tr>
-      <th>Date</th>
-      <th>Time</th>
-      <th>Systolic</th>
-      <th>Diastolic</th>
-      <th>Pulse</th>
-      <th>Weight</th>
-      <th>Edit/Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      {heartDataList.map((record) => {
+  <section className='display-records records-page'>
+    <div className="records-heading">
+      <div>
+        <p className="eyebrow">Your health journal</p>
+        <h1 className="page-title">My readings</h1>
+        <p className="page-description">Review and manage the readings you have recorded.</p>
+      </div>
+      <Link className="button" to="/NewHeartData">Add a reading</Link>
+    </div>
+    {heartDataList.length === 0 ? (
+      <div className="empty-records card">
+        <h2>No readings yet</h2>
+        <p>Your saved readings will appear here. Add your first entry to get started.</p>
+        <Link className="button" to="/NewHeartData">Add your first reading</Link>
+      </div>
+    ) : (
+      <div className="records-card">
+        <div className="records-table-scroll" role="region" aria-label="Heart readings table" tabIndex={0}>
+          <table>
+            <caption>Swipe or scroll horizontally to see all columns.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Systolic</th>
+                <th scope="col">Diastolic</th>
+                <th scope="col">Pulse</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {heartDataList.map((record) => {
         const isEditing = editingId === record.id;
         // Handle date without timezone issues
         const dateStr = typeof record.date === 'string' ? record.date : record.date.toISOString();
@@ -146,8 +170,10 @@ const DisplayRecords: React.FC = () => {
               <td><input type="number" className="edit-input" value={editFormData.pulse} onChange={(e) => handleEditChange(e, 'pulse')} /></td>
               <td><input type="number" className="edit-input" step="0.1" value={editFormData.weight} onChange={(e) => handleEditChange(e, 'weight')} /></td>
               <td>
-                <button className="edit-button save-button" onClick={handleSaveEdit}>Save</button>
-                <button className="edit-button cancel-button" onClick={handleCancelEdit}>Cancel</button>
+                <div className="record-actions">
+                  <button className="record-action" type="button" onClick={handleSaveEdit}>Save</button>
+                  <button className="record-action" type="button" onClick={handleCancelEdit}>Cancel</button>
+                </div>
               </td>
             </tr>
           );
@@ -162,15 +188,20 @@ const DisplayRecords: React.FC = () => {
           <td>{record.pulse}</td>
           <td>{record.weight}</td>
           <td>
-          <button onClick={() => handleEdit(record)}>Edit</button>
-          <button onClick={() => handleDelete(record.id)}>Delete</button>
+          <div className="record-actions">
+            <button className="record-action" type="button" onClick={() => handleEdit(record)}>Edit</button>
+            <button className="record-action record-action-danger" type="button" onClick={() => handleDelete(record.id)}>Delete</button>
+          </div>
           </td>
         </tr>
         );
-      })}
-    </tbody>
-    </table>
-  </div>
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )}
+  </section>
   );
 };
 

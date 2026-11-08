@@ -2,12 +2,9 @@
 
 function Footer() {
   return (
-    <footer>
-      <p>
-      CHF Tracker  &copy; {new Date().getFullYear()} Created by Richard Stuckey
-      </p>
-      <p> Live Longer. You're Worth It!
-      </p>
+    <footer className="site-footer">
+      <p>Heart Tracker &copy; {new Date().getFullYear()}</p>
+      <p>Keep your health journal close at hand.</p>
     </footer>
   );
 }

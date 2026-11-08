@@ -1,18 +1,59 @@
-
-.container-newHeartData {
-width:100%;
-height:auto;
+.reading-form-page {
+  max-width: 760px;
+  margin: 0 auto;
 }
 
-#root > div.container > .container-newHeartData > h2 {
-font-size:3em;
-color:yellow;
-text-align: center;
+.reading-form-card {
+  padding: clamp(24px, 5vw, 42px);
 }
 
-#root > div.container > .container-newHeartData > h3 {
-font-size:2em;
-color:aquamarine;
-text-align: center;
+.reading-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 18px;
+}
 
+.reading-form .form-group label span {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.reading-form-note {
+  margin: 0 0 24px;
+  color: var(--color-muted);
+}
+
+.reading-form-actions {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.loading-message {
+  padding: 40px 0;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .reading-form-card {
+    padding: 24px 20px;
+  }
+
+  .reading-form {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .reading-form-actions {
+    grid-column: 1;
+    flex-direction: column-reverse;
+  }
+
+  .reading-form-actions .button {
+    width: 100%;
+  }
 }
